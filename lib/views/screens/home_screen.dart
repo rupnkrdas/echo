@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     initSpeechToText();
     initTextToSpeech();
+
     super.initState();
   }
 
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       IosTextToSpeechAudioMode.voicePrompt,
     );
     await flutterTts.setVolume(1.0);
-    await flutterTts.setVoice({"name": "Siri", "locale": "en-IN"});
+    await flutterTts.setVoice({"name": "Allison (Enhanced)", "locale": "en-US"});
     setState(() {});
   }
 
@@ -107,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // AI-image
             ZoomIn(
               duration: const Duration(milliseconds: 1000),
-              child: Container(
+              child: SizedBox(
                 height: 150.h,
                 child: Image.asset(
                   'assets/images/bot.png',
@@ -127,21 +128,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       FadeIn(
                         delay: Duration(milliseconds: start + delay * 6),
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Colors.deepPurple.shade400.withOpacity(0.1),
                             ),
                             borderRadius: BorderRadius.circular(20).copyWith(
-                              topLeft: Radius.circular(0),
+                              topLeft: const Radius.circular(0),
                             ),
-                            gradient: LinearGradient(
+                            gradient: RadialGradient(
+                              center: Alignment.bottomRight,
+                              radius: 5.r,
                               colors: [
                                 Colors.deepPurple.shade200.withOpacity(0.1),
                                 Colors.deepPurple.shade200.withOpacity(0.3),
                               ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+
+                              // begin: Alignment.topLeft,
+                              // end: Alignment.bottomRight,
                             ),
                           ),
                           child: Text(
@@ -167,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return FadeIn(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Container(
+                                    child: SizedBox(
                                       width: double.infinity,
                                       child: Image.network(
                                         generatedImageURL!,
@@ -178,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               } else {
                                 return Lottie.asset(
-                                  'assets/lottiefiles/image_loading_animation.json',
+                                  'assets/lottiefiles/image_loading_animation_3.json',
                                   width: 200,
                                   height: 200,
                                   fit: BoxFit.fill,
@@ -227,11 +231,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            SizedBox(height: 20.h),
-
             // features header
             Visibility(
-              visible: generatedContent != null && generatedImageURL != null,
+              visible: generatedContent == null && generatedImageURL == null,
               child: SlideInLeft(
                 delay: Duration(milliseconds: start),
                 child: Padding(
@@ -259,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     ListView(
                       shrinkWrap: true,
-                      padding: EdgeInsets.only(top: 10.h),
+                      padding: EdgeInsets.only(top: 15.h),
                       children: [
                         SlideInLeft(
                           delay: Duration(milliseconds: start),
@@ -269,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             desctriptionText: 'A smarter way to stay organised and informed with ChatGPT',
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 10.h),
                         SlideInLeft(
                           delay: Duration(milliseconds: start + delay),
                           child: FeatureBox(
@@ -278,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             desctriptionText: 'Get inspired and stay creative with your personal assistant powered by Dall-E',
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 10.h),
                         SlideInLeft(
                           delay: Duration(milliseconds: start + delay * 2),
                           child: FeatureBox(
@@ -295,6 +297,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           gradient: LinearGradient(
                             colors: [
                               AppTheme.backgroundColor.withOpacity(0.99),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
                               AppTheme.backgroundColor.withOpacity(0),
                               AppTheme.backgroundColor.withOpacity(0),
                               AppTheme.backgroundColor.withOpacity(0),
@@ -327,6 +331,47 @@ class _HomeScreenState extends State<HomeScreen> {
               height: (generatedContent == null && generatedImageURL == null) ? 20.h : 0,
             ),
 
+            Visibility(
+              visible: (_lastWords.isNotEmpty),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.h),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.deepPurple.shade400.withOpacity(0.1),
+                    ),
+                    borderRadius: BorderRadius.circular(10.r).copyWith(
+                      bottomRight: Radius.circular(2.r),
+                    ),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.deepPurple.shade200.withOpacity(0.1),
+                        Colors.deepPurple.shade200.withOpacity(0.2),
+                        Colors.deepPurple.shade200.withOpacity(0.2),
+                        Colors.deepPurple.shade200.withOpacity(0.2),
+                        Colors.deepPurple.shade200.withOpacity(0.2),
+                        Colors.deepPurple.shade200.withOpacity(0.1),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: Text(
+                    _lastWords,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12.sp,
+                      fontWeight: (generatedContent == null) ? FontWeight.w600 : FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 8.h,
+            ),
             // button
             ZoomIn(
               delay: Duration(milliseconds: start + delay * 3),
@@ -373,7 +418,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: NeoPopTiltedButtonDecoration(
                   color: Colors.deepPurple.shade200,
                   plunkColor: Colors.deepPurple.shade500,
-                  shadowColor: Color.fromRGBO(36, 36, 36, 1),
+                  shadowColor: const Color.fromRGBO(36, 36, 36, 1),
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -383,7 +428,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20.h,
                     child: Row(
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Row(
                           children: [
                             if (!isListening && !isGeneratingImage) ...[
@@ -395,7 +440,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: AppTheme.backgroundColor,
                                 ),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.mic_rounded,
                                 color: AppTheme.backgroundColor,
                               ),
@@ -408,21 +453,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: AppTheme.backgroundColor,
                                 ),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.stop_rounded,
                                 color: AppTheme.backgroundColor,
                               ),
                             ] else if (isGeneratingImage) ...[
                               Lottie.asset(
                                 'assets/lottiefiles/button_loading_animation.json',
-                                fit: BoxFit.fill,
-                                width: 30.w,
-                                height: 30.w,
+                                fit: BoxFit.fitHeight,
+                                // width: 30.w,
+                                // height: 30.w,
                               ),
                             ],
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                   ),

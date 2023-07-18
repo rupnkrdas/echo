@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = '/splash';
+
+  const SplashScreen({super.key});
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -17,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: Duration(seconds: 4),
+      duration: const Duration(seconds: 4),
       vsync: this,
     );
 

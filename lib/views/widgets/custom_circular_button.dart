@@ -13,7 +13,7 @@ class CustomCircularButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: Color(0xff6A49B7),
+      splashColor: const Color(0xff6A49B7),
       customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50),
       ),
@@ -22,7 +22,7 @@ class CustomCircularButton extends StatelessWidget {
         height: 55.h,
         width: 55.w,
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
+          gradient: const LinearGradient(colors: [
             Color(0xffE655EF),
             Color(0xffE1BAC3),
             Color(0xffE1BAC3),
@@ -32,7 +32,7 @@ class CustomCircularButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         child: Padding(
-          padding: EdgeInsets.all(2),
+          padding: const EdgeInsets.all(2),
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: AppTheme.backgroundColor,

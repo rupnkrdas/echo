@@ -64,7 +64,7 @@ class LandingScreen extends StatelessWidget {
                 fontSize: 34.sp,
                 fontWeight: FontWeight.w500,
               ),
-              colors: [
+              colors: const [
                 Color(0xffE655EF),
                 Color(0xffE1BAC3),
                 Color(0xff6A49B7),

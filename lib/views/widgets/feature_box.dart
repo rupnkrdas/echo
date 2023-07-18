@@ -34,8 +34,8 @@ class FeatureBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
           ),
