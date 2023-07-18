@@ -25,7 +25,7 @@ class OpenAIService {
           },
         ),
       );
-      print(response.body);
+      log(response.body);
       if (response.statusCode == 200) {
         String responseType = jsonDecode(response.body)['choices'][0]['message']['content'];
         responseType = responseType.trim().toLowerCase();
