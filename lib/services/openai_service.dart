@@ -7,7 +7,8 @@ import 'package:echo/constants/secrets.dart';
 
 class OpenAIService {
   final List<Map<String, String>> messages = [];
-  Future<String> isArtPromptAPI(String prompt) async {
+
+  Future<String> determineResponseType(String prompt) async {
     try {
       final response = await http.post(
         Uri.parse('https://api.openai.com/v1/chat/completions'),
@@ -26,16 +27,16 @@ class OpenAIService {
       );
       print(response.body);
       if (response.statusCode == 200) {
-        String content = jsonDecode(response.body)['choices'][0]['message']['content'];
-        content = content.trim().toLowerCase();
+        String responseType = jsonDecode(response.body)['choices'][0]['message']['content'];
+        responseType = responseType.trim().toLowerCase();
 
-        switch (content) {
+        switch (responseType) {
           case 'true':
-            final res = await dallEAPI(prompt);
-            return res;
+            final response = await generateImage(prompt);
+            return response;
           default:
-            final res = await chatGPTAPI(prompt);
-            return res;
+            final response = await generateText(prompt);
+            return response;
         }
       }
 
@@ -45,8 +46,8 @@ class OpenAIService {
     }
   }
 
-  Future<String> chatGPTAPI(String prompt) async {
-    debugPrint("called chat GPT API");
+  Future<String> generateText(String prompt) async {
+    debugPrint("called generateText API");
     messages.add({
       "role": "user",
       "content": prompt,
@@ -83,8 +84,8 @@ class OpenAIService {
     }
   }
 
-  Future<String> dallEAPI(String prompt) async {
-    debugPrint("called DALL-E API");
+  Future<String> generateImage(String prompt) async {
+    debugPrint("called generateImage API");
     messages.add({
       "role": "user",
       "content": prompt,

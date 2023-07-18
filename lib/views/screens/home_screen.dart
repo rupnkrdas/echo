@@ -16,7 +16,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int delay = 200;
 
   bool isListening = false;
+  bool isGeneratingImage = false;
 
   @override
   void initState() {
@@ -59,26 +60,23 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  /// Each time to start a speech recognition session
+  /// Start a speech recognition session
   Future<void> _startListening() async {
-    setState(() {});
+    setState(() {
+      isListening = true;
+    });
     await speechToText.listen(onResult: _onSpeechResult);
   }
 
-  /// Manually stop the active speech recognition session
-  /// Note that there are also timeouts that each platform enforces
-  /// and the SpeechToText plugin supports setting timeouts on the
-  /// listen method.
+  /// Stop the active speech recognition session
   Future<void> _stopListening() async {
     await speechToText.stop();
     setState(() {
-      _lastWords = ''; // Reset recognized words
       isListening = false;
     });
   }
 
-  /// This is the callback that the SpeechToText plugin calls when
-  /// the platform returns recognized words.
+  /// Callback when the platform returns recognized words
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _lastWords = result.recognizedWords;
@@ -180,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               } else {
                                 return Lottie.asset(
-                                  'assets/lottiefiles/lottie_2.json',
+                                  'assets/lottiefiles/image_loading_animation.json',
                                   width: 200,
                                   height: 200,
                                   fit: BoxFit.fill,
@@ -194,42 +192,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   IgnorePointer(
                     child: Container(
-                        decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0),
-                          AppTheme.backgroundColor.withOpacity(0.5),
-                          AppTheme.backgroundColor.withOpacity(1),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0),
+                            AppTheme.backgroundColor.withOpacity(0.5),
+                            AppTheme.backgroundColor.withOpacity(1),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
                       ),
-                    )),
+                    ),
                   ),
                 ],
               ),
             ),
 
-            // sized box
             SizedBox(height: 20.h),
 
             // features header
@@ -294,38 +291,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     IgnorePointer(
                       child: Container(
-                          decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            AppTheme.backgroundColor.withOpacity(0.99),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0),
-                            AppTheme.backgroundColor.withOpacity(0.5),
-                            AppTheme.backgroundColor.withOpacity(1),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              AppTheme.backgroundColor.withOpacity(0.99),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0),
+                              AppTheme.backgroundColor.withOpacity(0.5),
+                              AppTheme.backgroundColor.withOpacity(1),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
                         ),
-                      )),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
 
-            // sized box
             SizedBox(
               height: (generatedContent == null && generatedImageURL == null) ? 20.h : 0,
             ),
@@ -338,33 +335,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTapUp: () {},
                 onTapDown: () async {
                   setState(() {
-                    isListening = false; // Update button state
+                    isListening = false;
                   });
                   if (await speechToText.hasPermission && speechToText.isNotListening) {
                     setState(() {
-                      isListening = true; // Update button state
+                      isListening = true;
                       generatedContent = null;
                     });
                     await _startListening();
                   } else if (speechToText.isListening) {
-                    final speech = await openAIService.isArtPromptAPI(_lastWords);
+                    setState(() {
+                      isListening = false;
+                      isGeneratingImage = true;
+                    });
+                    final speech = await openAIService.determineResponseType(_lastWords);
                     if (speech.contains('https')) {
                       // if the response is an image
-
                       setState(() {
                         generatedImageURL = speech;
                         generatedContent = null;
+                        isGeneratingImage = false;
                       });
                     } else {
                       // if the response is text
-
                       setState(() {
                         generatedImageURL = null;
                         generatedContent = speech;
+                        isGeneratingImage = false;
                       });
                       await systemSpeak(speech);
                     }
-
                     await _stopListening();
                   } else {
                     initSpeechToText();
@@ -376,15 +376,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   shadowColor: Color.fromRGBO(36, 36, 36, 1),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 8.h,
-                    ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8.h,
+                  ),
+                  child: SizedBox(
+                    height: 20.h,
                     child: Row(
                       children: [
                         Spacer(),
                         Row(
                           children: [
-                            if (!isListening) ...[
+                            if (!isListening && !isGeneratingImage) ...[
                               Text(
                                 'Speak',
                                 style: GoogleFonts.poppins(
@@ -410,12 +412,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.stop_rounded,
                                 color: AppTheme.backgroundColor,
                               ),
-                            ]
+                            ] else if (isGeneratingImage) ...[
+                              Lottie.asset(
+                                'assets/lottiefiles/button_loading_animation.json',
+                                fit: BoxFit.fill,
+                                width: 30.w,
+                                height: 30.w,
+                              ),
+                            ],
                           ],
                         ),
                         Spacer(),
                       ],
-                    )),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
