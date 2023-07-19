@@ -64,8 +64,6 @@ To get started with Echo, follow these steps:
 
 **Ensure you have Flutter installed and properly set up before proceeding with the installation steps.**
 
-**Note:** Make sure to keep the API keys file confidential and do not expose your API key publicly.
-
 Now you're ready to use Echo and generate intelligent text and captivating images based on your input. Enjoy the app and unleash your creativity!
 
 ## Usage
