@@ -52,7 +52,7 @@ class LandingScreen extends StatelessWidget {
                 height: 0.9,
                 fontSize: 32.sp,
                 fontWeight: FontWeight.w500,
-                color: AppTheme.whiteColor,
+                color: AppTheme.platinum,
               ),
             ),
           ),

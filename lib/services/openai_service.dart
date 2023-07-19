@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:echo/constants/secrets.dart';
+import 'package:echo/constants/config.dart';
 
 class OpenAIService {
   final List<Map<String, String>> messages = [];
