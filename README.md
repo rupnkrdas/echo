@@ -12,6 +12,8 @@ Echo is an AI-powered assistant that transforms spoken words into intelligent te
 
 ## Demo
 
+https://github.com/rupnkrdas/echo/assets/88283289/1d1f655b-ecdc-4b80-bd52-755b7c9af4e8
+
 ![Screenshots](demo/merged.png)
 
 ## Technical Details
