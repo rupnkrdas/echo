@@ -12,6 +12,8 @@ Echo is an AI-powered assistant that transforms spoken words into intelligent te
 
 ## Demo
 
+https://github.com/rupnkrdas/echo/assets/88283289/1d1f655b-ecdc-4b80-bd52-755b7c9af4e8
+
 ![Screenshots](demo/merged.png)
 
 ## Technical Details
@@ -61,8 +63,6 @@ To get started with Echo, follow these steps:
 5. Access Echo through your device or emulator.
 
 **Ensure you have Flutter installed and properly set up before proceeding with the installation steps.**
-
-**Note:** Make sure to keep the API keys file confidential and do not expose your API key publicly.
 
 Now you're ready to use Echo and generate intelligent text and captivating images based on your input. Enjoy the app and unleash your creativity!
 
