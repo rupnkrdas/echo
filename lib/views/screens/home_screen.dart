@@ -435,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 'Speak',
                                 style: GoogleFonts.poppins(
-                                  fontSize: 20,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
                                   color: AppTheme.backgroundColor,
                                 ),
@@ -448,7 +448,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 'Stop',
                                 style: GoogleFonts.poppins(
-                                  fontSize: 20,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
                                   color: AppTheme.backgroundColor,
                                 ),
@@ -461,8 +461,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               Lottie.asset(
                                 'assets/lottiefiles/button_loading_animation.json',
                                 fit: BoxFit.fitHeight,
-                                // width: 30.w,
-                                // height: 30.w,
                               ),
                             ],
                           ],
